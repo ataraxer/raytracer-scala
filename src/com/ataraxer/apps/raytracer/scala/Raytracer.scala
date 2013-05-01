@@ -170,62 +170,11 @@ object Raytracer {
     (for (y <- 0 to height-1; x <- 0 to width-1)
       yield pixelAt(x, y)).toList
 
-
-  def saveFilm(pixels: List[Pixel]) = {
-    /* args */
-    val dpi = 72
-    /* args END */
-
-    val k = width * height
-    val imageSize = 4 * k
-    val fileSize = 54 + imageSize
-
-    val factor: Double = 39.375
-    val meter: Int = factor.toInt
-
-    val ppm: Int = dpi * meter
-
-    def toByte(value: Int): List[Byte] =
-      (for (i <- 0 to 3)
-        yield (value >> 8 * i).toByte).toList
-
-    val bmpFileHeader: List[Byte] =
-      List[Byte]('B'.toByte, 'M'.toByte) ::: // biType 2
-      toByte(fileSize) :::                   // biSize 4
-      List[Byte](0,0,0,0) :::                // biReserved{1,2} 4
-      List[Byte](54,0,0,0)                   // biOffBits 4
-
-    val bmpInfoHeader: List[Byte] =
-      List[Byte](40, 0, 0, 0) :::            // biSize 4
-      toByte(width) :::                      // biWidth 4
-      toByte(height) :::                     // biHeight 4
-      List[Byte](1,0) :::                    // biPlanes 2
-      List[Byte](24,0) :::                   // biBitCount 2
-      List[Byte](0,0,0,0) :::                // biCompression 4
-      toByte(imageSize) :::                  // biSizeImage 4
-      toByte(ppm) :::                        // biXPelsPerMeter 4
-      toByte(ppm) :::                        // biYPelsPerMeter 4
-      List[Byte](0,0,0,0) :::                // biClrUsed 4
-      List[Byte](0,0,0,0)                    // biClrImportant 4
-
-    val file: FileOutputStream = new FileOutputStream("film/scene2.bmp")
-    try {
-      file.write(bmpFileHeader.toArray)
-      file.write(bmpInfoHeader.toArray)
-      for (pixel <- pixels) {
-        file.write(pixel.toArray)
-      }
-    } finally {
-      file.close()
-    }
-  }
-
-
   def main(args: Array[String]) {
     println("rendering...")
     def tmp = {
       val pixels = render(width, height)
-      saveFilm(pixels)
+      FilmSaver.save(pixels, "scene.bmp")
     }
     //val p = new Parser("file.rt")
     //p.parse()

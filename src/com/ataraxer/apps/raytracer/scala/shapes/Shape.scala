@@ -13,6 +13,6 @@ import com.ataraxer.apps.raytracer.scala.{Intersection, Ray, Pixel}
 abstract class Shape(val color: Pixel) {
   def normalAt(point: Vec3): Vec3
   def intersectionWith(ray: Ray): Intersection
-  def isReflective = color.reflectivity > 0 && color.reflectivity <= 1
+  def isReflective = color.isReflective
   def isTiled = color.reflectivity == 2
 }

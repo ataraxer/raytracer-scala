@@ -56,6 +56,8 @@ class Pixel(
     new Pixel(red, green, blue, reflectivity)
   }
 
+  def isReflective = reflectivity > 0 && reflectivity <= 1
+
 //  def clip =
 //    new Pixel(red % 1, green % 1, blue % 1, reflectivity)
 

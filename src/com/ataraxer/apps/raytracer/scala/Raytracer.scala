@@ -23,6 +23,9 @@ object Raytracer {
   val clearColor = new Pixel(0, 0, 0, 0)
   val ambientLight = 0.2
 
+  val reflectionsOn = true
+  val lightingOn = true
+
   def scene(): Scene = {
     val prettyGreen = new Pixel(0.5, 1.0, 0.5, 0.3)
     val prettyBlue = new Pixel(0.25, 0.25, 0.75, 0.5)
@@ -30,23 +33,18 @@ object Raytracer {
     val white = new Pixel(1.0, 1.0, 1.0, 0.0)
     val mirror = new Pixel(1.0, 1.0, 1.0, 0.95)
 
-    val X = new Vec3(1, 0, 0)
-    val Y = new Vec3(0, 1, 0)
-    val Z = new Vec3(0, 0, 1)
-
     val cameraPosition = new Vec3(3, 1.5, -4)
     val center = new Vec3(0.5, 0, 0)
     val sceneCamera = new Camera(cameraPosition, center)
 
     val shapes: List[Shape] = List(
-      new Plain(Y, -1, tileFloor),
-      new Plain(Z, 9, mirror),
+      new Plain(new Vec3(0, 1, 0), -1, tileFloor),
+      new Plain(new Vec3(0, 0, 1), 9, mirror),
       new Sphere(new Vec3(-1.75, 0, 0), 1, prettyGreen),
       new Sphere(new Vec3(1.75, 0, 0), 1, prettyBlue))
 
-    val lightPosition = new Vec3(-7, 10, -10)
     val lights: List[Light] = List(
-      new Light(lightPosition, white))
+      new Light(new Vec3(-7, 10, -10), white))
 
     new Scene(sceneCamera, shapes, lights)
   }
@@ -57,43 +55,31 @@ object Raytracer {
     new Pixel(0, 0, 0, 0)
 
 
-  def intersectionColor(ray: Ray, intersection: Intersection): Pixel = {
-    val intersectionPosition = ray positionOf intersection
+  def reflectionColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
+    var deltaColor: Pixel = new Pixel(0, 0, 0, 0)
+    // reflection from objects with specular intensity
+    val reflectionDirection: Vec3 =
+      ray.direction reflectAgainst shapeNormal
 
-    val shapeNormal = intersection.shape normalAt intersectionPosition
-    var shapeColor = intersection.shape.color
+    val reflectionRay = new Ray(
+      intersectionPosition,
+      reflectionDirection)
 
-    if (intersection.shape.isTiled) {
-      // checkered-tile floor pattern
-      val square: Int =
-        floor(intersectionPosition.x).toInt + floor(intersectionPosition.z).toInt
+    // determine what ray intersects with first
+    val reflectionIntersection = scene closestIntersectionWith reflectionRay
+    if (reflectionIntersection != null) {
+      val reflectionIntersectionColor =
+        this intersectionColor (reflectionRay, reflectionIntersection)
 
-      if ((square % 2) == 0)
-        shapeColor = new Pixel(0, 0, 0, 0)
+      deltaColor += (reflectionIntersectionColor * shapeColor.reflectivity)
     }
 
-    var finalColor: Pixel = shapeColor * ambientLight
+    deltaColor
+  }
 
-    if (intersection.shape.isReflective) {
-      // reflection from objects with specular intensity
-      val reflectionDirection: Vec3 =
-        ray.direction reflectAgainst shapeNormal
 
-      val reflectionRay = new Ray(
-        intersectionPosition,
-        reflectionDirection)
-
-      // determine what ray intersects with first
-      val reflectionIntersection = scene closestIntersectionWith reflectionRay
-
-      if (reflectionIntersection != null) {
-          val reflectionIntersectionColor =
-            this intersectionColor (reflectionRay, reflectionIntersection)
-
-          finalColor += (reflectionIntersectionColor * shapeColor.reflectivity)
-      }
-    }
-
+  def lightColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
+    var deltaColor: Pixel = new Pixel(0, 0, 0, 0)
 
     for (light <- scene.lights) {
       val directionToLight =
@@ -112,20 +98,51 @@ object Raytracer {
           (shadowIntersection != null && shadowIntersection.distance <= distanceToLight)
 
         if (!shadowed) {
-          finalColor += (shapeColor * light.color * angle)
+          deltaColor += (shapeColor * light.color * angle)
 
-          if (intersection.shape.isReflective) {
+//          if (intersection.shape.isReflective) {
+          if (shapeColor.isReflective) {
             val reflectionDirection: Vec3 =
               ray.direction reflectAgainst shapeNormal
 
             val specular: Double = reflectionDirection dot directionToLight
             if (specular > 0)
-              finalColor +=
+              deltaColor +=
                 (light.color * pow(specular, 10) * shapeColor.reflectivity)
           }
         }
       }
     }
+    deltaColor
+  }
+
+
+  def intersectionColor(ray: Ray, intersection: Intersection): Pixel = {
+    val intersectionPosition = ray positionOf intersection
+
+    val shapeNormal = intersection.shape normalAt intersectionPosition
+    var shapeColor = intersection.shape.color
+
+    if (intersection.shape.isTiled) {
+      // checkered-tile floor pattern
+      val square: Int =
+        floor(intersectionPosition.x).toInt + floor(intersectionPosition.z).toInt
+
+      if ((square % 2) == 0)
+        shapeColor = new Pixel(0, 0, 0, 0)
+    }
+
+    var finalColor: Pixel =
+      if (lightingOn)
+        shapeColor * ambientLight + lightColor(ray, intersectionPosition, shapeColor, shapeNormal)
+      else
+        shapeColor
+
+    if (reflectionsOn && intersection.shape.isReflective)
+      finalColor += reflectionColor(ray, intersectionPosition, shapeColor, shapeNormal)
+
+
+
     finalColor.clip
   }
 
@@ -174,17 +191,18 @@ object Raytracer {
     println("rendering...")
     def tmp = {
       val pixels = render(width, height)
-      FilmSaver.save(pixels, "scene.bmp")
+      FilmSaver.save(pixels, "scene2.bmp")
     }
     //val p = new Parser("file.rt")
     //p.parse()
     time{tmp}
   }
 
-  def time[A](f: => A) = {
+  def time[A](operation: => A) = {
     val s = System.nanoTime
-    val ret = f
-    println("time: "+(System.nanoTime-s)/1e6+"ms")
-    ret
+    val result = operation
+    val time = (System.nanoTime-s)/1e6
+    println("done in: %fms".format(time))
+    result
   }
 }

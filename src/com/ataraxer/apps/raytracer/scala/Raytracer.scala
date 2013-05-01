@@ -56,7 +56,6 @@ object Raytracer {
 
 
   def reflectionColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
-    var deltaColor: Pixel = new Pixel(0, 0, 0, 0)
     // reflection from objects with specular intensity
     val reflectionDirection: Vec3 =
       ray.direction reflectAgainst shapeNormal
@@ -71,10 +70,9 @@ object Raytracer {
       val reflectionIntersectionColor =
         this intersectionColor (reflectionRay, reflectionIntersection)
 
-      deltaColor += (reflectionIntersectionColor * shapeColor.reflectivity)
-    }
-
-    deltaColor
+      reflectionIntersectionColor * shapeColor.reflectivity
+    } else
+      new Pixel(0, 0, 0, 0)
   }
 
 
@@ -193,8 +191,6 @@ object Raytracer {
       val pixels = render(width, height)
       FilmSaver.save(pixels, "scene2.bmp")
     }
-    //val p = new Parser("file.rt")
-    //p.parse()
     time{tmp}
   }
 

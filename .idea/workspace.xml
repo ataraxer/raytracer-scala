@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala" line="197" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="966be800-0904-4511-8996-6396c57cc6f5" name="Default" comment="Add FilmSaver">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Pixel.scala" afterPath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Pixel.scala" />
+    <list default="true" id="966be800-0904-4511-8996-6396c57cc6f5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala" afterPath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala" afterPath="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="raytracer-scala.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Board.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367086611351" ignored="false" />
     <file path="/fragment.java" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367166701288" ignored="false" />
-    <file path="/Raytracer.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367404333802" ignored="false" />
+    <file path="/Raytracer.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367406149479" ignored="false" />
     <file path="/Vec3.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367169824971" ignored="false" />
-    <file path="/Scene.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367338584268" ignored="false" />
+    <file path="/Scene.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367406484333" ignored="false" />
     <file path="/Intersection.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367337425514" ignored="false" />
     <file path="/Ray.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367338284354" ignored="false" />
     <file path="/Camera.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367150128090" ignored="false" />
@@ -28,9 +23,9 @@
     <file path="/Light.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367169579994" ignored="false" />
     <file path="/Parser.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367400862784" ignored="false" />
     <file path="/file.rt" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367397942972" ignored="false" />
-    <file path="/Dummy.txt" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367404784286" ignored="false" />
+    <file path="/Dummy.txt" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367404820519" ignored="false" />
     <file path="/a.dummy" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367401718316" ignored="false" />
-    <file path="/FilmSaver.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367402274969" ignored="false" />
+    <file path="/FilmSaver.scala" changelist="966be800-0904-4511-8996-6396c57cc6f5" time="1367405737907" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,7 @@
       <file leaf-file-name="Raytracer.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="50" selection-start="2684" selection-end="2684" vertical-scroll-proportion="0.0">
+            <state line="192" column="5" selection-start="5611" selection-end="5611" vertical-scroll-proportion="-130.56">
               <folding>
                 <element signature="e#43#93#0" expanded="true" />
               </folding>
@@ -102,10 +97,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shape.scala" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="scene2.bmp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/film/scene2.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilmSaver.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/FilmSaver.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="59" column="32" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Scene.scala" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Scene.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="0" selection-start="945" selection-end="945" vertical-scroll-proportion="0.66284406">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pixel.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Pixel.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="41" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Shape.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.35091743">
+            <state line="18" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#50#100#0" expanded="true" />
               </folding>
@@ -140,13 +169,13 @@
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/math/Vec3.scala" />
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Intersection.scala" />
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Ray.scala" />
-        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Scene.scala" />
         <option value="$PROJECT_DIR$/file.rt" />
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Parser.scala" />
-        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/FilmSaver.scala" />
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Pixel.scala" />
-        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala" />
         <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala" />
+        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/FilmSaver.scala" />
+        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala" />
+        <option value="$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Scene.scala" />
       </list>
     </option>
   </component>
@@ -216,72 +245,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Parser.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shapes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raytracer-scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="math" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -528,7 +491,11 @@
       <created>1367402498792</created>
       <updated>1367402498792</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Refactor reflections and shading/lighting">
+      <created>1367404824837</created>
+      <updated>1367404824837</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -599,7 +566,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add FilmSaver" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor reflections and shading/lighting" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -614,6 +581,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Add FilmSaver" />
+    <MESSAGE value="Refactor reflections and shading/lighting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -652,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Scene.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="35" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/file.rt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="38" selection-start="426" selection-end="426" vertical-scroll-proportion="0.0">
@@ -673,13 +634,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/FilmSaver.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="78" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Intersection.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="57" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
@@ -687,9 +641,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Parser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="16" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#50#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Pixel.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="58" column="41" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/FilmSaver.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="32" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -704,28 +681,19 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Parser.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="16" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Raytracer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="50" selection-start="2684" selection-end="2684" vertical-scroll-proportion="0.0">
+        <state line="192" column="5" selection-start="5611" selection-end="5611" vertical-scroll-proportion="-130.56">
           <folding>
             <element signature="e#43#93#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/shapes/Shape.scala">
+    <entry file="file://$PROJECT_DIR$/src/com/ataraxer/apps/raytracer/scala/Scene.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.35091743">
-          <folding>
-            <element signature="e#50#100#0" expanded="true" />
-          </folding>
+        <state line="35" column="0" selection-start="945" selection-end="945" vertical-scroll-proportion="0.66284406">
+          <folding />
         </state>
       </provider>
     </entry>

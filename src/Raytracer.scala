@@ -2,6 +2,7 @@ package com.ataraxer.apps.raytracer.scala
 
 import com.ataraxer.apps.raytracer.scala.linal.Vec3
 import com.ataraxer.apps.raytracer.scala.shapes.{Shape, Sphere, Plain}
+import com.ataraxer.apps.raytracer.scala.timer.Timer
 
 import scala.math.{pow, floor, exp, sqrt}
 
@@ -279,19 +280,14 @@ object Raytracer {
 
   def main(args: Array[String]) {
     println("rendering...")
-    def time[A](operation: => A) = {
-      val s = System.nanoTime
-      val result = operation
-      val time = (System.nanoTime-s)/1e6
-      println("done in: %fms".format(time))
-      result
-    }
-    def tmp = {
-      val pixels = render(width, height)
-      FilmSaver.save(pixels, "scene2.bmp")
-    }
-    time{tmp}
-//    pixelAt(240, height - 240)
-//    pixelAt(width/2, height/2)
+    val rendering_start = System.nanoTime
+    val pixels = render(width, height)
+    val rendering_time = (System.nanoTime - rendering_start) / 1e6
+    println("rendering done! time: %fms".format(rendering_time))
+    println("saving...")
+    val saving_start = System.nanoTime
+    FilmSaver.save(pixels, "scene5.bmp")
+    val saving_time = (System.nanoTime - saving_start) / 1e6
+    println("saving done! time: %fms".format(saving_time))
   }
 }

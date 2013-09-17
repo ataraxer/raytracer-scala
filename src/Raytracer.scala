@@ -279,14 +279,17 @@ object Raytracer {
       yield pixelAt(x, y)).toList
 
   def main(args: Array[String]) {
+    // Command line options
+    val Array(width, height, output) = args
+    // END
     println("rendering...")
     val rendering_start = System.nanoTime
-    val pixels = render(width, height)
+    val pixels = render(width.toInt, height.toInt)
     val rendering_time = (System.nanoTime - rendering_start) / 1e6
     println("rendering done! time: %fms".format(rendering_time))
     println("saving...")
     val saving_start = System.nanoTime
-    FilmSaver.save(pixels, "scene5.bmp")
+    FilmSaver.save(pixels, output)
     val saving_time = (System.nanoTime - saving_start) / 1e6
     println("saving done! time: %fms".format(saving_time))
   }

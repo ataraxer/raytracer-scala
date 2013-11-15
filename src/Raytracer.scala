@@ -15,9 +15,10 @@ import java.io.FileOutputStream
  * To change this template use File | Settings | File Templates.
  */
 object Raytracer {
-  val width  = 1280
-  val height = 720
-  val aspectRatio = width.toDouble / height
+  // default width and height
+  var width = 1280
+  var height = 720
+  def aspectRatio = width.toDouble / height
   val aaDepth = 1
   val accuracy = 0.000001
   val clearColor = new Pixel(0, 0, 0, 0)
@@ -279,12 +280,13 @@ object Raytracer {
 
   def main(args: Array[String]) {
     // Command line options
-    val Array(width, height, output) = args
-    println(width, height, output)
+    val Array(w, h, output) = args
+    this.width = w.toInt
+    this.height = h.toInt
     // END
     println("rendering...")
     val rendering_start = System.nanoTime
-    val pixels = render(width.toInt, height.toInt)
+    val pixels = render(width, height)
     val rendering_time = (System.nanoTime - rendering_start) / 1e6
     println("rendering done! time: %fms".format(rendering_time))
     println("saving...")

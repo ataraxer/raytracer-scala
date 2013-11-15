@@ -2,7 +2,6 @@ package com.ataraxer.apps.raytracer.scala
 
 import com.ataraxer.apps.raytracer.scala.linal.Vec3
 import com.ataraxer.apps.raytracer.scala.shapes.{Shape, Sphere, Plain}
-import com.ataraxer.apps.raytracer.scala.timer.Timer
 
 import scala.math.{pow, floor, exp, sqrt}
 
@@ -281,6 +280,7 @@ object Raytracer {
   def main(args: Array[String]) {
     // Command line options
     val Array(width, height, output) = args
+    println(width, height, output)
     // END
     println("rendering...")
     val rendering_start = System.nanoTime

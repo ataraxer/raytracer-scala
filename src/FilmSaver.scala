@@ -35,22 +35,22 @@ object FilmSaver {
 
     val bmpFileHeader: List[Byte] =
       List[Byte]('B'.toByte, 'M'.toByte) ++ // biType 2
-        toByte(fileSize) ++                   // biSize 4
-        List[Byte](0,0,0,0) ++                // biReserved{1,2} 4
-        List[Byte](54,0,0,0)                   // biOffBits 4
+        toByte(fileSize) ++                 // biSize 4
+        List[Byte](0,0,0,0) ++              // biReserved{1,2} 4
+        List[Byte](54,0,0,0)                // biOffBits 4
 
     val bmpInfoHeader: List[Byte] =
       List[Byte](40, 0, 0, 0) ++            // biSize 4
-        toByte(Raytracer.width) ++                      // biWidth 4
-        toByte(Raytracer.height) ++                     // biHeight 4
-        List[Byte](1,0) ++                    // biPlanes 2
-        List[Byte](24,0) ++                   // biBitCount 2
-        List[Byte](0,0,0,0) ++                // biCompression 4
-        toByte(imageSize) ++                  // biSizeImage 4
-        toByte(ppm) ++                        // biXPelsPerMeter 4
-        toByte(ppm) ++                        // biYPelsPerMeter 4
-        List[Byte](0,0,0,0) ++                // biClrUsed 4
-        List[Byte](0,0,0,0)                    // biClrImportant 4
+      toByte(Raytracer.width) ++            // biWidth 4
+      toByte(Raytracer.height) ++           // biHeight 4
+      List[Byte](1,0) ++                    // biPlanes 2
+      List[Byte](24,0) ++                   // biBitCount 2
+      List[Byte](0,0,0,0) ++                // biCompression 4
+      toByte(imageSize) ++                  // biSizeImage 4
+      toByte(ppm) ++                        // biXPelsPerMeter 4
+      toByte(ppm) ++                        // biYPelsPerMeter 4
+      List[Byte](0,0,0,0) ++                // biClrUsed 4
+      List[Byte](0,0,0,0)                   // biClrImportant 4
 
     val file: FileOutputStream = new FileOutputStream(filmDirectory + filmName)
     try {

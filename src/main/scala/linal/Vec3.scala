@@ -10,12 +10,9 @@ import math.sqrt
  * Time: 10:21 AM
  * To change this template use File | Settings | File Templates.
  */
-class Vec3(val x: Double, val y: Double, val z: Double) {
+case class Vec3(x: Double, y: Double, z: Double) {
   // default constructor
   def this() = this(0, 0, 0)
-
-  override def toString: String =
-    "(%f, %f, %f)".format(x, y, z)
 
   def magnitude =
     sqrt(x*x + y*y + z*z)
@@ -23,28 +20,23 @@ class Vec3(val x: Double, val y: Double, val z: Double) {
   def isNormal: Boolean =
     (magnitude == 1)
 
-  def normalize =
-    new Vec3(x/magnitude, y/magnitude, z/magnitude)
+  def normalize = Vec3(x/magnitude, y/magnitude, z/magnitude)
 
   def dot(v: Vec3): Double =
     (x*v.x + y*v.y + z*v.z)
 
-  def cross(v: Vec3) = new Vec3(
+  def cross(v: Vec3) = Vec3(
     (y*v.z) - (z*v.y),
     (z*v.x) - (x*v.z),
     (x*v.y) - (y*v.x))
 
-  def +(v: Vec3) =
-    new Vec3(x+v.x, y+v.y, z+v.z)
+  def +(v: Vec3) = Vec3(x+v.x, y+v.y, z+v.z)
 
-  def -(v: Vec3) =
-    new Vec3(x-v.x, y-v.y, z-v.z)
+  def -(v: Vec3) = Vec3(x-v.x, y-v.y, z-v.z)
 
-  def unary_- =
-    new Vec3(-x, -y, -z)
+  def unary_- = Vec3(-x, -y, -z)
 
-  def *(s: Double) =
-    new Vec3(x*s, y*s, z*s)
+  def *(s: Double) = Vec3(x*s, y*s, z*s)
 
 //  def reflectAgainst(surfaceNormal: Vec3): Vec3 = {
 //    val dot1: Double  = surfaceNormal dot (-this)

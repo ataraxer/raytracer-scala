@@ -11,7 +11,7 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  */
 class Camera(val position: Vec3, lookAt: Vec3) {
   val direction = (lookAt - position).normalize
-  val right = (new Vec3(0, 1, 0) cross direction).normalize
+  val right = (Vec3(0, 1, 0) cross direction).normalize
   val down = right cross direction
 
   def shiftDirection(xShift: Double, yShift: Double) =

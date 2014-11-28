@@ -41,14 +41,14 @@ object Raytracer {
     val sceneCamera = Camera(cameraPosition, center)
 
     val shapes: List[Shape] = List(
-      new Plain(Vec3(0, 1, 0), -1, tileFloor),
-      new Plain(Vec3(0, 0, 1), 9, mirror),
-      new Sphere(Vec3(-1.75, 0, 0), 1, prettyGreen),
-      new Sphere(Vec3(1.75, 0, 0), 1, prettyBlue))
+      Plain(Vec3(0, 1, 0), -1, tileFloor),
+      Plain(Vec3(0, 0, 1), 9, mirror),
+      Sphere(Vec3(-1.75, 0, 0), 1, prettyGreen),
+      Sphere(Vec3(1.75, 0, 0), 1, prettyBlue))
 
 //    val shapes: List[Shape] = List(
-//      new Plain(Vec3(0, 1, 0), -1, tileFloor),
-//      new Sphere(Vec3(0, 0, 0), 1, prettyGreen))
+//      Plain(Vec3(0, 1, 0), -1, tileFloor),
+//      Sphere(Vec3(0, 0, 0), 1, prettyGreen))
 
     val lights: List[Light] = List(
       Light(Vec3(-7, 10, -10), white))

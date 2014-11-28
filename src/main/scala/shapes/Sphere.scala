@@ -11,7 +11,9 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 4:05 PM
  * To change this template use File | Settings | File Templates.
  */
-class Sphere(center: Vec3, radius: Double, color: Pixel) extends Shape(color) {
+case class Sphere(center: Vec3, radius: Double, color: Pixel) extends Shape {
+  def refractionIndex = 1.0
+
   def normalAt(point: Vec3) = (point - center).normalize
   def intersectionWith(ray: Ray): Intersection = {
     val a: Double = 1 // normalized

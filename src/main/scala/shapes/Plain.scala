@@ -10,7 +10,9 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 4:05 PM
  * To change this template use File | Settings | File Templates.
  */
-class Plain(normal: Vec3, distance: Double, color: Pixel) extends Shape(color) {
+case class Plain(normal: Vec3, distance: Double, color: Pixel) extends Shape {
+  val refractionIndex = 1.0
+
   def normalAt(point: Vec3) = normal
   def intersectionWith(ray: Ray): Intersection = {
     val a: Double = ray.direction dot normal

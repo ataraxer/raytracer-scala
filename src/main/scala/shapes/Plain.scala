@@ -21,6 +21,6 @@ class Plain(normal: Vec3, distance: Double, color: Pixel) extends Shape(color) {
     }
 
     val b: Double = normal dot (ray.origin - (normal * distance));
-    new Intersection(this, -b/a) // distance from the origin to the point of intersection
+    Intersection(this, -b/a) // distance from the origin to the point of intersection
   }
 }

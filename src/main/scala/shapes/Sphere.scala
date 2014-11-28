@@ -38,7 +38,7 @@ class Sphere(center: Vec3, radius: Double, color: Pixel) extends Shape(color) {
           // root two
           ((sqrt(D) - b) / 2) - 0.000001
         }
-      new Intersection(this, intersectionPoint)
+      Intersection(this, intersectionPoint)
     } else {
     // the ray missed the sphere
       null

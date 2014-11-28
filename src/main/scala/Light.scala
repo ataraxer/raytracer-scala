@@ -9,7 +9,4 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 12:00 PM
  * To change this template use File | Settings | File Templates.
  */
-class Light(val position: Vec3, val color: Pixel) {
-  override def toString =
-    "Light: %s".format(position.toString)
-}
+case class Light(position: Vec3, color: Pixel)

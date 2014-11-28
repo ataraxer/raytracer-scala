@@ -51,7 +51,7 @@ object Raytracer {
 //      new Sphere(Vec3(0, 0, 0), 1, prettyGreen))
 
     val lights: List[Light] = List(
-      new Light(Vec3(-7, 10, -10), white))
+      Light(Vec3(-7, 10, -10), white))
 
     new Scene(sceneCamera, shapes, lights)
   }

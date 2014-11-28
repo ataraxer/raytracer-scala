@@ -38,7 +38,7 @@ object Raytracer {
     val cameraPosition = Vec3(3, 1.5, -4)
     val center = Vec3(0.5, 0, 0)
 //    val center = Vec3(0, 0, 0)
-    val sceneCamera = new Camera(cameraPosition, center)
+    val sceneCamera = Camera(cameraPosition, center)
 
     val shapes: List[Shape] = List(
       new Plain(Vec3(0, 1, 0), -1, tileFloor),

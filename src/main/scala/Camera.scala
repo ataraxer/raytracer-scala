@@ -9,7 +9,7 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 12:14 PM
  * To change this template use File | Settings | File Templates.
  */
-class Camera(val position: Vec3, lookAt: Vec3) {
+case class Camera(position: Vec3, lookAt: Vec3) {
   val direction = (lookAt - position).normalize
   val right = (Vec3(0, 1, 0) cross direction).normalize
   val down = right cross direction

@@ -9,10 +9,7 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 12:00 PM
  * To change this template use File | Settings | File Templates.
  */
-class Ray(val origin: Vec3, val direction: Vec3, val refractionIndex: Double = 1.0) {
+case class Ray(origin: Vec3, direction: Vec3, refractionIndex: Double = 1.0) {
   def positionOf(intersection: Intersection) =
     origin + (direction * intersection.distance)
-
-  override def toString =
-    "Ray: D%s\tO%s".format(direction, origin)
 }

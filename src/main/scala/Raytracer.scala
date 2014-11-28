@@ -116,7 +116,7 @@ object Raytracer {
 
       val refractionRayDirection = shapeNormal * (n * cosOut - cosIn) + (ray.direction * n)
 
-      val refractionRay = new Ray(
+      val refractionRay = Ray(
         intersectionPosition,
         refractionRayDirection)
 
@@ -152,7 +152,7 @@ object Raytracer {
     val reflectionDirection: Vec3 =
       ray.direction reflectAgainst shapeNormal
 
-    val reflectionRay = new Ray(
+    val reflectionRay = Ray(
       intersectionPosition,
       reflectionDirection)
 
@@ -172,7 +172,7 @@ object Raytracer {
       val angle = shapeNormal dot directionToLight
 
       if (angle > 0) {
-        val shadowRay = new Ray(
+        val shadowRay = Ray(
           intersectionPosition,
           directionToLight)
 
@@ -259,7 +259,7 @@ object Raytracer {
     }
 
     val direction: Vec3 = camera shiftDirection (xAmount, yAmount)
-    new Ray(camera.position, direction)
+    Ray(camera.position, direction)
   }
 
 

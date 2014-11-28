@@ -10,7 +10,7 @@ import com.ataraxer.apps.raytracer.scala.linal.Vec3
  * Time: 11:35 AM
  * To change this template use File | Settings | File Templates.
  */
-class Scene(val camera: Camera, val shapes: List[Shape], val lights: List[Light]) {
+case class Scene(camera: Camera, shapes: List[Shape], lights: List[Light]) {
 
   private def intersections(ray: Ray): List[Intersection] =
     for (shape <- shapes)

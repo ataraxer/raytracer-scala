@@ -62,16 +62,19 @@ object FilmSaver {
 
     bmpInfoHeader.rewind()
 
+    val imageBuffer = ByteBuffer.allocate(imageSize)
+    pixels.foreach( _.writeTo(imageBuffer) )
 
-    val file: FileOutputStream = new FileOutputStream(filmDirectory + filmName)
+    imageBuffer.rewind()
+
+    val fileChannel = new FileOutputStream(filmDirectory + filmName).getChannel
+
     try {
-      file.write(bmpFileHeader.array)
-      file.write(bmpInfoHeader.array)
-      for (pixel <- pixels) {
-        file.write(pixel.toArray)
-      }
+      fileChannel.write(bmpFileHeader)
+      fileChannel.write(bmpInfoHeader)
+      fileChannel.write(imageBuffer)
     } finally {
-      file.close()
+      fileChannel.close()
     }
   }
 }

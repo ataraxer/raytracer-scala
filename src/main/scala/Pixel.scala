@@ -1,5 +1,7 @@
 package com.ataraxer.apps.raytracer.scala
 
+import java.nio.ByteBuffer
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ataraxer
@@ -68,6 +70,9 @@ class Pixel(
       (green * 255).toInt,
       (blue * 255).toInt)
 
-  def toArray: Array[Byte] =
-    Array((blue*255).toByte, (green*255).toByte, (red*255).toByte)
+  def writeTo(buffer: ByteBuffer) = {
+    buffer.put((blue * 255).toByte)
+    buffer.put((green * 255).toByte)
+    buffer.put((red * 255).toByte)
+  }
 }

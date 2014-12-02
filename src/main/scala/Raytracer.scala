@@ -177,8 +177,9 @@ object Raytracer {
           directionToLight)
 
         val shadowIntersection = scene closestIntersectionWith shadowRay
-        val shadowed =
-          (shadowIntersection != null && shadowIntersection.distance <= distanceToLight)
+        val shadowed = shadowIntersection map {
+          _.distance <= distanceToLight
+        } getOrElse false
 
         if (!shadowed) {
           deltaColor += (shapeColor * light.color * angle)
@@ -240,10 +241,12 @@ object Raytracer {
 
   def traceRay(ray: Ray): Pixel = {
     val intersection = scene closestIntersectionWith ray
-    if (intersection != null)
-      this intersectionColor (ray, intersection)
-    else
+
+    intersection map {
+      this.intersectionColor(ray, _)
+    } getOrElse {
       clearColor
+    }
   }
 
 

@@ -21,7 +21,7 @@ object Raytracer {
   def aspectRatio = width.toDouble / height
   val aaDepth = 1
   val accuracy = 0.000001
-  val clearColor = new Pixel(0, 0, 0, 0)
+  val clearColor = Pixel(0, 0, 0, 0)
   val ambientLight = 0.2
 
   val refractionOn = false
@@ -29,11 +29,11 @@ object Raytracer {
   val lightingOn = true
 
   def scene: Scene = {
-    val prettyGreen = new Pixel(0.5, 1.0, 0.5, 0.3)
-    val prettyBlue = new Pixel(0.25, 0.25, 0.75, 0.5)
-    val tileFloor = new Pixel(1.0, 1.0, 1.0, 2)
-    val white = new Pixel(1.0, 1.0, 1.0, 0.0)
-    val mirror = new Pixel(1.0, 1.0, 1.0, 0.95)
+    val prettyGreen = Pixel(0.5, 1.0, 0.5, 0.3)
+    val prettyBlue = Pixel(0.25, 0.25, 0.75, 0.5)
+    val tileFloor = Pixel(1.0, 1.0, 1.0, 2)
+    val white = Pixel(1.0, 1.0, 1.0, 0.0)
+    val mirror = Pixel(1.0, 1.0, 1.0, 0.95)
 
     val cameraPosition = Vec3(3, 1.5, -4)
     val center = Vec3(0.5, 0, 0)
@@ -59,7 +59,7 @@ object Raytracer {
 
   def blendPixels(pixels: List[Pixel]): Pixel =
     // TODO: implement
-    new Pixel(0, 0, 0, 0)
+    Pixel(0, 0, 0, 0)
 
 
 //  def refractionColor2(ray: Ray, color: Pixel, shape: Shape, scene: Scene,
@@ -77,7 +77,7 @@ object Raytracer {
 //      double CosThetaT = sqrt(1.0 - SinThetaT*SinThetaT);
 //      Cvector3 R4 = ray.GetDirection()*n - N1*(n*CosThetaI+CosThetaT);
 //      R4.Normalize();
-//      val refr_color = new Pixel(0.0, 0.0, 0.0, 0.0);
+//      val refr_color = Pixel(0.0, 0.0, 0.0, 0.0);
 //      double dist1;
 //      Cvector3 R5 = intersectionPosition + R4*EPSILON;
 //      Ray R6 = Ray( R5,R4);
@@ -122,7 +122,7 @@ object Raytracer {
 
       (this traceRay refractionRay) * shapeColor.transparency
     } else
-      new Pixel(0, 0, 0, 0)
+      Pixel(0, 0, 0, 0)
 
 //    if (cosine < 0){ // going into the sphere
 //      float nr = 0.66;
@@ -162,7 +162,7 @@ object Raytracer {
 
 
   def lightColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
-    var deltaColor: Pixel = new Pixel(0, 0, 0, 0)
+    var deltaColor: Pixel = Pixel(0, 0, 0, 0)
 
     for (light <- scene.lights) {
       val directionToLight =
@@ -206,7 +206,7 @@ object Raytracer {
 //    recursion -= 1
 //    if (recursion < 0) {
 //      recursion = 5
-//      return new Pixel(0, 0, 0, 0)
+//      return Pixel(0, 0, 0, 0)
 //    }
 
     val intersectionPosition = ray positionOf intersection
@@ -220,7 +220,7 @@ object Raytracer {
         floor(intersectionPosition.x).toInt + floor(intersectionPosition.z).toInt
 
       if ((square % 2) == 0)
-        shapeColor = new Pixel(0, 0, 0, 0)
+        shapeColor = Pixel(0, 0, 0, 0)
     }
 
     var finalColor: Pixel =

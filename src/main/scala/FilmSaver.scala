@@ -3,14 +3,8 @@ package com.ataraxer.apps.raytracer.scala
 import java.io.FileOutputStream
 import java.nio.{ByteBuffer, ByteOrder}
 
-/**
- * Created with IntelliJ IDEA.
- * User: Ataraxer
- * Date: 5/1/13
- * Time: 1:48 PM
- * To change this template use File | Settings | File Templates.
- */
-object FilmSaver {
+
+case class FilmSaver(width: Int, height: Int) {
   val filmDirectory = "film/"
 
   def save(pixels: List[Pixel], filmName: String) =
@@ -21,7 +15,7 @@ object FilmSaver {
     val dpi = 72
     /* args END */
 
-    val k = Raytracer.width * Raytracer.height
+    val k = width * height
     val imageSize = 4 * k
     val fileSize = 54 + imageSize
 
@@ -49,8 +43,8 @@ object FilmSaver {
     val bmpInfoHeader = ByteBuffer.allocate(40)
     bmpInfoHeader.order(ByteOrder.LITTLE_ENDIAN)
     bmpInfoHeader.put(Array[Byte](40, 0, 0, 0))  // biSize 4
-    bmpInfoHeader.putInt(Raytracer.width)        // biWidth 4
-    bmpInfoHeader.putInt(Raytracer.height)       // biHeight 4
+    bmpInfoHeader.putInt(width)                  // biWidth 4
+    bmpInfoHeader.putInt(height)                 // biHeight 4
     bmpInfoHeader.put(Array[Byte](1, 0))         // biPlanes 2
     bmpInfoHeader.put(Array[Byte](24,0))         // biBitCount 2
     bmpInfoHeader.put(Array[Byte](0, 0, 0, 0))   // biCompression 4

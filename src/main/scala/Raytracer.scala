@@ -5,19 +5,8 @@ import com.ataraxer.apps.raytracer.scala.shapes.{Shape, Sphere, Plain}
 
 import scala.math.{pow, floor, exp, sqrt}
 
-import java.io.FileOutputStream
 
-/**
- * Created with IntelliJ IDEA.
- * User: Ataraxer
- * Date: 4/27/13
- * Time: 10:17 PM
- * To change this template use File | Settings | File Templates.
- */
-object Raytracer {
-  // default width and height
-  var width = 1280
-  var height = 720
+case class Raytracer(width: Int, height: Int) {
   def aspectRatio = width.toDouble / height
   val aaDepth = 1
   val accuracy = 0.000001
@@ -53,7 +42,7 @@ object Raytracer {
     val lights: List[Light] = List(
       Light(Vec3(-7, 10, -10), white))
 
-    Scene(sceneCamera, shapes, lights)
+    Scene(sceneCamera, shapes, lights, accuracy)
   }
 
 
@@ -277,25 +266,8 @@ object Raytracer {
   }
 
 
-  def render(width: Int, height: Int) =
+  def render = {
     (for (y <- 0 to height-1; x <- 0 to width-1)
       yield pixelAt(x, y)).toList
-
-  def main(args: Array[String]) {
-    // Command line options
-    val Array(w, h, output) = args
-    this.width = w.toInt
-    this.height = h.toInt
-    // END
-    println("rendering...")
-    val rendering_start = System.nanoTime
-    val pixels = render(width, height)
-    val rendering_time = (System.nanoTime - rendering_start) / 1e6
-    println("rendering done! time: %fms".format(rendering_time))
-    println("saving...")
-    val saving_start = System.nanoTime
-    FilmSaver.save(pixels, output)
-    val saving_time = (System.nanoTime - saving_start) / 1e6
-    println("saving done! time: %fms".format(saving_time))
   }
 }

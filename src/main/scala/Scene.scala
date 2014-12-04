@@ -4,7 +4,12 @@ import com.ataraxer.apps.raytracer.scala.shapes.{Sphere, Shape}
 import com.ataraxer.apps.raytracer.scala.linal.Vec3
 
 
-case class Scene(camera: Camera, shapes: List[Shape], lights: List[Light]) {
+case class Scene(
+    camera: Camera,
+    shapes: List[Shape],
+    lights: List[Light],
+    accuracy: Double)
+{
   private def intersections(ray: Ray) = {
     shapes.flatMap( _ intersectionWith ray )
   }
@@ -12,7 +17,7 @@ case class Scene(camera: Camera, shapes: List[Shape], lights: List[Light]) {
 
   def closestIntersectionWith(ray: Ray): Option[Intersection] = {
     this.intersections(ray)
-      .filter( _.distance > Raytracer.accuracy )
+      .filter( _.distance > accuracy )
       .sortBy( _.distance )
       .headOption
   }

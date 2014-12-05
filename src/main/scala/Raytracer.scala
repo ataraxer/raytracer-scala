@@ -51,44 +51,12 @@ case class Raytracer(width: Int, height: Int) {
     Pixel(0, 0, 0, 0)
 
 
-//  def refractionColor2(ray: Ray, color: Pixel, shape: Shape, scene: Scene,
-//  shapeNormal: Vec3, intersectionPosition: Vec3, Depth: Int, Krf: Double, refractionIndexOut: Double,
-//  distance: Double, HitOrMiss: Int)
-//  {
-//    val refractionIndexIn: Double = shape.refractionIndex
-//    val n: Double = refractionIndexOut / refractionIndexIn;
-//    // hit or miss --> distance to intersection?
-//    val N1: Vec3 = shapeNormal * HitOrMiss;
-//    val CosThetaI: Double = -N1 dor ray.direction;
-//    val SinThetaI: Double = sqrt(1.0 - CosThetaI*CosThetaI);
-//    val SinThetaT: Double = n * SinThetaI;
-//    if(SinThetaT*SinThetaT < 1.0) {
-//      double CosThetaT = sqrt(1.0 - SinThetaT*SinThetaT);
-//      Cvector3 R4 = ray.GetDirection()*n - N1*(n*CosThetaI+CosThetaT);
-//      R4.Normalize();
-//      val refr_color = Pixel(0.0, 0.0, 0.0, 0.0);
-//      double dist1;
-//      Cvector3 R5 = intersectionPosition + R4*EPSILON;
-//      Ray R6 = Ray( R5,R4);
-//      ray_trace( R6, refr_color, scene,Depth+1,refraction_index,dist1);
-//      // Beer's Law
-//      Color absorbance = shape->GetMaterial()->GetColor()*0.15*dist1*(-1.0);
-//      Color transparency = Color( exp(absorbance.x), exp(absorbance.y), exp(absorbance.z) );
-//      color += refr_color*transparency;
-//    }
-//    return 0;
-//  }
-
   def refractionColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3, shape: Shape): Pixel = {
-    println("refracting")
     def cofunc(v: Double) = sqrt(1 - v*v)
 
     //val vVec: Vec3 = (point - ray.origin).normalize
     val cosOut = shapeNormal dot -ray.direction
     val sinOut = cofunc(cosOut)
-
-    if (cosOut < 0) println("in")
-               else println("out")
 
     val n: Double =
       if(cosOut < 0)
@@ -110,30 +78,9 @@ case class Raytracer(width: Int, height: Int) {
         refractionRayDirection)
 
       (this traceRay refractionRay) * shapeColor.transparency
-    } else
+    } else {
       Pixel(0, 0, 0, 0)
-
-//    if (cosine < 0){ // going into the sphere
-//      float nr = 0.66;
-//      val   sineIn = n * sineOut
-//      val cosineIn = sqrt(1 - sineIn * sineIn);
-//
-//      if (cosineIn >= 0) {
-////        val transmisiveRay = (nr * (normal.dot(-vVec))-rootContent)*normal-(nr*-vVec);
-//        val transmisiveRay = (nr * cosineOut - cosineIn) * shapeNormal - (nr * -ray.direction);
-//        deltaColor += shape.transparancy * shade((point + 0.0009 * vVec), transmisiveRay, recursionDepth + 1);
-//      }
-//    }
-//    else { // going out of sphere
-//      float nr = 1.5;
-//      float rootContent = sqrtf(1 - nr * nr * (1-(-normal.dot(-rayDirection)*(-normal.dot(-rayDirection)))));
-//      if(rootContent >= 0.0){
-//        transmisiveRay = (nr * (-normal.dot(-rayDirection)) - rootContent) * -normal - ( nr * -rayDirection );
-//        pixelColor += object.getTransparency() * shade((point + 0.0009 *
-//          rayDirection),transmisiveRay, recursionDepth + 1);
-//      }
-//    }
-
+    }
   }
 
 
@@ -189,15 +136,8 @@ case class Raytracer(width: Int, height: Int) {
     deltaColor
   }
 
-  var recursion = 5
 
   def intersectionColor(ray: Ray, intersection: Intersection, depth: Int = 0): Pixel = {
-//    recursion -= 1
-//    if (recursion < 0) {
-//      recursion = 5
-//      return Pixel(0, 0, 0, 0)
-//    }
-
     val intersectionPosition = ray positionOf intersection
 
     val shapeNormal = intersection.shape normalAt intersectionPosition

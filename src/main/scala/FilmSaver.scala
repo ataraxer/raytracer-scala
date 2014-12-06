@@ -7,10 +7,10 @@ import java.nio.{ByteBuffer, ByteOrder}
 case class FilmSaver(width: Int, height: Int) {
   val filmDirectory = "film/"
 
-  def save(pixels: List[Pixel], filmName: String) =
+  def save(pixels: Seq[Pixel], filmName: String) =
     saveBMP(pixels, filmName)
 
-  private def saveBMP(pixels: List[Pixel], filmName: String) = {
+  private def saveBMP(pixels: Seq[Pixel], filmName: String) = {
     /* args */
     val dpi = 72
     /* args END */

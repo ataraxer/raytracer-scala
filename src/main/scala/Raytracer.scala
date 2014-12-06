@@ -6,10 +6,9 @@ import com.ataraxer.apps.raytracer.scala.shapes.{Shape, Sphere, Plain}
 import scala.math.{pow, floor, exp, sqrt}
 
 
-case class Raytracer(width: Int, height: Int) {
+case class Raytracer(width: Int, height: Int, accuracy: Double) {
   def aspectRatio = width.toDouble / height
   val aaDepth = 1
-  val accuracy = 0.000001
   val clearColor = Pixel(0, 0, 0, 0)
   val ambientLight = 0.2
 
@@ -17,41 +16,20 @@ case class Raytracer(width: Int, height: Int) {
   val reflectionsOn = true
   val lightingOn = true
 
-  def scene: Scene = {
-    val prettyGreen = Pixel(0.5, 1.0, 0.5, 0.3)
-    val prettyBlue = Pixel(0.25, 0.25, 0.75, 0.5)
-    val tileFloor = Pixel(1.0, 1.0, 1.0, 2)
-    val white = Pixel(1.0, 1.0, 1.0, 0.0)
-    val mirror = Pixel(1.0, 1.0, 1.0, 0.95)
-
-    val cameraPosition = Vec3(3, 1.5, -4)
-    val center = Vec3(0.5, 0, 0)
-//    val center = Vec3(0, 0, 0)
-    val sceneCamera = Camera(cameraPosition, center)
-
-    val shapes: List[Shape] = List(
-      Plain(Vec3(0, 1, 0), -1, tileFloor),
-      Plain(Vec3(0, 0, 1), 9, mirror),
-      Sphere(Vec3(-1.75, 0, 0), 1, prettyGreen),
-      Sphere(Vec3(1.75, 0, 0), 1, prettyBlue))
-
-//    val shapes: List[Shape] = List(
-//      Plain(Vec3(0, 1, 0), -1, tileFloor),
-//      Sphere(Vec3(0, 0, 0), 1, prettyGreen))
-
-    val lights: List[Light] = List(
-      Light(Vec3(-7, 10, -10), white))
-
-    Scene(sceneCamera, shapes, lights, accuracy)
-  }
-
 
   def blendPixels(pixels: List[Pixel]): Pixel =
     // TODO: implement
     Pixel(0, 0, 0, 0)
 
 
-  def refractionColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3, shape: Shape): Pixel = {
+  def refractionColor(
+    scene: Scene,
+    ray: Ray,
+    intersectionPosition: Vec3,
+    shapeColor: Pixel,
+    shapeNormal: Vec3,
+    shape: Shape): Pixel =
+  {
     def cofunc(v: Double) = sqrt(1 - v*v)
 
     //val vVec: Vec3 = (point - ray.origin).normalize
@@ -77,14 +55,20 @@ case class Raytracer(width: Int, height: Int) {
         intersectionPosition,
         refractionRayDirection)
 
-      (this traceRay refractionRay) * shapeColor.transparency
+      traceRay(scene, refractionRay) * shapeColor.transparency
     } else {
       Pixel(0, 0, 0, 0)
     }
   }
 
 
-  def reflectionColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
+  def reflectionColor(
+    scene: Scene,
+    ray: Ray,
+    intersectionPosition: Vec3,
+    shapeColor: Pixel,
+    shapeNormal: Vec3) =
+  {
     val reflectionDirection: Vec3 =
       ray.direction reflectAgainst shapeNormal
 
@@ -93,11 +77,17 @@ case class Raytracer(width: Int, height: Int) {
       reflectionDirection)
 
     // determine what ray intersects with
-    (this traceRay reflectionRay) * shapeColor.reflectivity
+    traceRay(scene, reflectionRay) * shapeColor.reflectivity
   }
 
 
-  def lightColor(ray: Ray, intersectionPosition: Vec3, shapeColor: Pixel, shapeNormal: Vec3) = {
+  def lightColor(
+    scene: Scene,
+    ray: Ray,
+    intersectionPosition: Vec3,
+    shapeColor: Pixel,
+    shapeNormal: Vec3) =
+  {
     var deltaColor: Pixel = Pixel(0, 0, 0, 0)
 
     for (light <- scene.lights) {
@@ -137,7 +127,12 @@ case class Raytracer(width: Int, height: Int) {
   }
 
 
-  def intersectionColor(ray: Ray, intersection: Intersection, depth: Int = 0): Pixel = {
+  def intersectionColor(
+    scene: Scene,
+    ray: Ray,
+    intersection: Intersection,
+    depth: Int = 0): Pixel =
+  {
     val intersectionPosition = ray positionOf intersection
 
     val shapeNormal = intersection.shape normalAt intersectionPosition
@@ -154,25 +149,25 @@ case class Raytracer(width: Int, height: Int) {
 
     var finalColor: Pixel =
       if (lightingOn)
-        shapeColor * ambientLight + lightColor(ray, intersectionPosition, shapeColor, shapeNormal)
+        shapeColor * ambientLight + lightColor(scene, ray, intersectionPosition, shapeColor, shapeNormal)
       else
         shapeColor
 
     if (reflectionsOn && intersection.shape.isReflective)
-      finalColor += reflectionColor(ray, intersectionPosition, shapeColor, shapeNormal)
+      finalColor += reflectionColor(scene, ray, intersectionPosition, shapeColor, shapeNormal)
 
     if (refractionOn)
-      finalColor += refractionColor(ray, intersectionPosition, shapeColor, shapeNormal, intersection.shape)
+      finalColor += refractionColor(scene, ray, intersectionPosition, shapeColor, shapeNormal, intersection.shape)
 
     finalColor.clip
   }
 
 
-  def traceRay(ray: Ray): Pixel = {
+  def traceRay(scene: Scene, ray: Ray): Pixel = {
     val intersection = scene closestIntersectionWith ray
 
     intersection map {
-      this.intersectionColor(ray, _)
+      this.intersectionColor(scene, ray, _)
     } getOrElse {
       clearColor
     }
@@ -195,19 +190,23 @@ case class Raytracer(width: Int, height: Int) {
   }
 
 
-  def pixelAt(x: Int, y: Int, aaDepth: Int = 0): Pixel = {
+  def pixelAt(scene: Scene, x: Int, y: Int, aaDepth: Int = 0): Pixel = {
     if (aaDepth > 0) {
       val aaPixels =
         (for (aax <- 0 to aaDepth; aay <- 0 to aaDepth)
-          yield pixelAt(x + aax, y + aay)).toList
+          yield pixelAt(scene, x + aax, y + aay)).toList
       this blendPixels aaPixels
     } else
-      this traceRay rayToPixel(scene.camera, x, y)
+      traceRay(scene, rayToPixel(scene.camera, x, y))
   }
 
 
-  def render = {
-    (for (y <- 0 to height-1; x <- 0 to width-1)
-      yield pixelAt(x, y)).toList
+  def render(scene: Scene): Seq[Pixel] = {
+    for {
+      y <- 0 until height
+      x <- 0 until width
+    } yield {
+      pixelAt(scene, x, y)
+    }
   }
 }

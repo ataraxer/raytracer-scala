@@ -17,9 +17,14 @@ case class Raytracer(width: Int, height: Int, accuracy: Double) {
   val lightingOn = true
 
 
-  def blendPixels(pixels: List[Pixel]): Pixel =
-    // TODO: implement
-    Pixel(0, 0, 0, 0)
+  def blendPixels(pixels: List[Pixel]): Pixel = {
+    pixels reduce { (prev, next) =>
+      val red = (prev.red + next.red) / 2
+      val green = (prev.green + next.green) / 2
+      val blue = (prev.blue + next.blue) / 2
+      Pixel(red, green, blue, 0)
+    }
+  }
 
 
   def refractionColor(
